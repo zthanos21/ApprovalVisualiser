@@ -28,9 +28,7 @@
                     <RichTextBox  Grid.Column="0" Grid.Row="1" Height="auto" x:Name="rEdit">
                         <FlowDocument>
                             <Paragraph>
-                                <InlineUIContainer>
-                                    <GridSplitter Height="100" Width="5"/>
-                                </InlineUIContainer>
+                                
                             </Paragraph>
 
                         </FlowDocument>
@@ -49,7 +47,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal">
-                        <Button Content="Preview"  Margin="5"/>
+                        <Button Content="Preview"  Margin="5" Click="Button_Click_1"/>
                         <Button Content="Generate" Margin="5" />
                     </StackPanel>
                     <DataGrid Grid.Row="1"
@@ -104,7 +102,8 @@
                                          Header="RefData Display Type">
                                 <DataGridComboBoxColumn.ElementStyle>
                                     <Style TargetType="ComboBox">
-                                        <Setter Property="ItemsSource" Value="{Binding DataContext.RefDataDisplaySource, RelativeSource={RelativeSource AncestorType=Window}}" />
+                                        <Setter Property="ItemsSource" Value="{Binding DataContext.RefDataDisplaySource,
+                                            RelativeSource={RelativeSource AncestorType=Window}}" />
                                         <Setter Property="IsReadOnly" Value="True"/>
                                     </Style>
                                 </DataGridComboBoxColumn.ElementStyle>
@@ -116,15 +115,20 @@
                             </DataGridComboBoxColumn>
 
 
-
-
-
-
                         </DataGrid.Columns>
 
                     </DataGrid>
                     <StackPanel  Grid.Column="1" Grid.Row="1">
-                        
+                        <TextBlock>Summary</TextBlock>
+                        <TextBox Height="90" Text="{Binding SummaryTextSample, Mode=OneWay}">
+                           
+                        </TextBox>
+                        <TextBlock>Details</TextBlock>
+                        <DataGrid Grid.Row="1"
+                        ItemsSource="{Binding  DataContext.SummaryDetailsSample,
+                                            RelativeSource={RelativeSource AncestorType=Window}}"
+                               AutoGenerateColumns="True"  
+                               AlternatingRowBackground="LightYellow"  />
                     </StackPanel>
                 </Grid>
             </TabItem>

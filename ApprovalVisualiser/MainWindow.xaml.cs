@@ -32,8 +32,6 @@ namespace ApprovalVisualiser
             InitializeComponent();
             const string FILE_PATH = @"C:\Users\sales\Source\Repos\ProManager\YatchBooking.Entities\Models\Agent\Layout.cs";
             DataContext = vm;
-          //  tabParser.DataContext =
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -56,16 +54,25 @@ namespace ApprovalVisualiser
             {
                 ProcessAttributesVM.InitializeData(data);
             }
+
+            public void Preview()
+            {
+                SummaryTextSample = ProcessAttributesVM.GetSummaryText();
+                SummaryDetailsSample = ProcessAttributesVM.GetDetailsSample();
+
+            }
             public ObservableCollection<ItemSourceData> RefDataDisplaySource { get; set; }
             public ObservableCollection<ItemSourceData> FieldTypeSource { get; set; }
+            public ObservableCollection<KeyValues> SummaryDetailsSample { get; set; }
             public ProcessAttributesVM ProcessAttributesVM { get; set; }
+            public string SummaryTextSample { get; set; }
         }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            vm.Preview();
 
-
-
-
-
+        }
     }
 
 

@@ -9,7 +9,7 @@
         public string PopertyType { get; set; }
         //public Type TP { get; set; }
         public string Description { get; set; }
-        public string FieldType { get; set; }
+        public FieldType FieldType { get; set; }
         public string FieldName { get; set; }
         public string ReferenceData { get; set; }
         public string ReferenceDataDisplayType { get; set; }
