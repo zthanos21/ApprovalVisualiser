@@ -205,8 +205,11 @@
     <Compile Include="DataContext.cs" />
     <Compile Include="Models\EntityAnalyzer.cs" />
     <Compile Include="Models\KeyValues.cs" />
+    <Compile Include="Models\ParseListType.cs" />
     <Compile Include="Models\PropertyDefinition.cs" />
     <Compile Include="Models\TemplateClass.cs" />
+    <Compile Include="Models\TemplatedCodeGen.cs" />
+    <Compile Include="Models\TemplatedCodeGenBase.cs" />
     <Compile Include="Models\Templates.cs" />
     <Compile Include="Models\TemplateType.cs" />
     <Compile Include="ViewModels\ProcessAttributesVM.cs" />
