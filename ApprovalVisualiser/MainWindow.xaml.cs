@@ -26,13 +26,13 @@ namespace ApprovalVisualiser
     /// </summary>
     public partial class MainWindow : Window
     {
-        ProcessAttributesVM vm = new ProcessAttributesVM();
-        public IEnumerable<ItemSourceData> RedDataDisplaySource = MyDataContext.GetItemsFromEnum<ReferenceDataDescriptionType>();
+        public DataVM vm = new DataVM();
         public MainWindow()
         {
             InitializeComponent();
             const string FILE_PATH = @"C:\Users\sales\Source\Repos\ProManager\YatchBooking.Entities\Models\Agent\Layout.cs";
             DataContext = vm;
+          //  tabParser.DataContext =
 
         }
 
@@ -40,28 +40,30 @@ namespace ApprovalVisualiser
         {
             string richText = new TextRange(rEdit.Document.ContentStart, rEdit.Document.ContentEnd).Text;
             vm.InitializeData(richText);
-            //tcMain.DataContext = vm;
-
-          //  SetMyProperty(this, vm.GetAll());
+       
             tcMain.SelectedIndex = 1;
         }
 
-
-
-
-        public static ObservableCollection<AvailableProperty> GetMyProperty(DependencyObject obj)
+        public class DataVM
         {
-            return (ObservableCollection<AvailableProperty>)obj.GetValue(MyPropertyProperty);
+            public DataVM()
+            {
+                RefDataDisplaySource = MyDataContext.GetItemsFromEnum<ReferenceDataDescriptionType>();
+                FieldTypeSource = MyDataContext.GetItemsFromEnum<FieldType>();
+                ProcessAttributesVM = new ProcessAttributesVM();
+            }
+            public void InitializeData(string data)
+            {
+                ProcessAttributesVM.InitializeData(data);
+            }
+            public ObservableCollection<ItemSourceData> RefDataDisplaySource { get; set; }
+            public ObservableCollection<ItemSourceData> FieldTypeSource { get; set; }
+            public ProcessAttributesVM ProcessAttributesVM { get; set; }
         }
 
-        public static void SetMyProperty(DependencyObject obj, ObservableCollection<AvailableProperty> value)
-        {
-            obj.SetValue(MyPropertyProperty, value);
-        }
 
-        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty MyPropertyProperty =
-            DependencyProperty.RegisterAttached("MyProperty", typeof(ObservableCollection<AvailableProperty>), typeof(MainWindow), null);
+
+
 
 
     }

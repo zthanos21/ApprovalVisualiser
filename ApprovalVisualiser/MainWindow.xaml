@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
+
     <Grid>
         <TabControl Name="tcMain">
             <TabItem Header="General">
@@ -37,55 +38,99 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Security" >
+            <TabItem Header="Parser" Name="tabParser">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="29*"/>
-                        <ColumnDefinition Width="759*"/>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
-
-                    <DataGrid 
-                        ItemsSource="{Binding  }"
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="Preview"  Margin="5"/>
+                        <Button Content="Generate" Margin="5" />
+                    </StackPanel>
+                    <DataGrid Grid.Row="1"
+                        ItemsSource="{Binding  ProcessAttributesVM}"
                                AutoGenerateColumns="False"  
-                               AlternatingRowBackground="LightGray" Grid.ColumnSpan="2" Margin="0,0,0,-0.286">
+                               AlternatingRowBackground="LightGray"  >
                         <DataGrid.Columns>
                             <DataGridCheckBoxColumn 
-                                Header="New?" 
-                                Width="40"
-                                    Binding="{Binding UseForApproval}" />
-                        </DataGrid.Columns>
+                                Header="UseForBRMS" 
+     
+                                    Binding="{Binding UseForBRMS}" />
+                            <DataGridCheckBoxColumn 
+                                Header="UseForSummary" 
+                                    Binding="{Binding UseForSummary}" />
+                            <DataGridCheckBoxColumn 
+                                Header="UseForDetails" 
+                                    Binding="{Binding UseForDetails}" />
 
-                        <DataGridTextColumn 
+                            <DataGridTextColumn 
                                 Header="PropertyName" 
                                 Width="SizeToHeader"
                                 Binding="{Binding PropertyName}" />
                             <DataGridTextColumn 
                                 Header="PopertyType" 
-                                Width="SizeToCells"
                                 Binding="{Binding PopertyType}" />
+
                             <DataGridTextColumn 
-                                Header="PopertyType" 
-                                Width="SizeToCells"
-                                Binding="{Binding PopertyType}" />
-                        <DataGridComboBoxColumn 
-                                Header="ReferenceDataDisplayType" 
-                                Width="SizeToCells"
-                                SelectedItemBinding="{Binding RedDataDisplaySource}"
-                                SelectedValuePath="{Binding Code}"
-                      >
-                            
-                        </DataGridComboBoxColumn>
+                                Header="Description" 
+  
+                                Binding="{Binding Description}" />
+
+                            <DataGridComboBoxColumn  SelectedValueBinding="{Binding FieldType}" 
+                                         SelectedValuePath="Code" 
+                                         DisplayMemberPath="Description" 
+                                         Header="FieldType">
+                                <DataGridComboBoxColumn.ElementStyle>
+                                    <Style TargetType="ComboBox">
+                                        <Setter Property="ItemsSource" Value="{Binding DataContext.FieldTypeSource, RelativeSource={RelativeSource AncestorType=Window}}" />
+                                        <Setter Property="IsReadOnly" Value="True"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.ElementStyle>
+                                <DataGridComboBoxColumn.EditingElementStyle>
+                                    <Style TargetType="ComboBox">
+                                        <Setter Property="ItemsSource" Value="{Binding DataContext.FieldTypeSource, RelativeSource={RelativeSource AncestorType=Window}}" />
+                                    </Style>
+                                </DataGridComboBoxColumn.EditingElementStyle>
+                            </DataGridComboBoxColumn>
+
+                            <DataGridComboBoxColumn  SelectedValueBinding="{Binding ReferenceDataDisplayType}" 
+                                         SelectedValuePath="Code" 
+                                         DisplayMemberPath="Description" 
+                                         Header="RefData Display Type">
+                                <DataGridComboBoxColumn.ElementStyle>
+                                    <Style TargetType="ComboBox">
+                                        <Setter Property="ItemsSource" Value="{Binding DataContext.RefDataDisplaySource, RelativeSource={RelativeSource AncestorType=Window}}" />
+                                        <Setter Property="IsReadOnly" Value="True"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.ElementStyle>
+                                <DataGridComboBoxColumn.EditingElementStyle>
+                                    <Style TargetType="ComboBox">
+                                        <Setter Property="ItemsSource" Value="{Binding DataContext.RefDataDisplaySource, RelativeSource={RelativeSource AncestorType=Window}}" />
+                                    </Style>
+                                </DataGridComboBoxColumn.EditingElementStyle>
+                            </DataGridComboBoxColumn>
+
+
+
+
+
+
+                        </DataGrid.Columns>
 
                     </DataGrid>
-                    <!--<ListView ItemsSource="{Binding }" Grid.Column="1"/>-->
+                    <StackPanel  Grid.Column="1" Grid.Row="1">
+                        
+                    </StackPanel>
                 </Grid>
             </TabItem>
             <TabItem Header="Details" />
         </TabControl>
     </Grid>
-    <!--<Window.DataContext>
-        <vm:ProcessAttributesVM/>
-    </Window.DataContext>-->
 
 
 </Window>
